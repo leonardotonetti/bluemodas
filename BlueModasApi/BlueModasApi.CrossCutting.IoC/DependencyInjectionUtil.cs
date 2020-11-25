@@ -1,8 +1,10 @@
 ﻿using BlueModasApi.Business.Interfaces.Business.Service;
+using BlueModasApi.Business.Interfaces.Data.Repository;
 using BlueModasApi.Business.Interfaces.Data.UnitOfWork;
 using BlueModasApi.Business.Services;
 using BlueModasApi.Business.Util.Notification;
 using BlueModasApi.Data.Context;
+using BlueModasApi.Data.Repository;
 using BlueModasApi.Data.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,10 +28,17 @@ namespace BlueModasApi.CrossCutting.IoC
             #region Services
 
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ITipoPublicoAlvoService, TipoPublicoAlvoService>();
+            services.AddScoped<ICategoriaService, CategoriaService>();
+            services.AddScoped<IProdutoService, ProdutoService>();
 
             #endregion
 
             #region Repositories
+
+            services.AddScoped<ITipoPublicoAlvoRepository, TipoPublicoAlvoRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
             #endregion
 

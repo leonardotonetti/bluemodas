@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BlueModasApi.Business.Models
 {
@@ -11,6 +12,9 @@ namespace BlueModasApi.Business.Models
         [MaxLength(500)]
         [Required]
         public string UrlImagem { get; set; }
+        [Column(TypeName = "decimal(15,2)")]
+        [Required]
+        public decimal ValorUnitario { get; set; }
         [Required]
         public int TipoPublicoAlvoCategoriaId { get; set; }
 

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlueModasApi.Data.Migrations
 {
     [DbContext(typeof(BlueModasApiContext))]
-    [Migration("20201124025318_MigrationInicial")]
+    [Migration("20201124221222_MigrationInicial")]
     partial class MigrationInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,8 +104,8 @@ namespace BlueModasApi.Data.Migrations
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Quantidade")
-                        .HasColumnType("decimal(15,4)");
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
 
                     b.HasKey("PedidoItemId");
 
@@ -135,6 +135,9 @@ namespace BlueModasApi.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<decimal>("ValorUnitario")
+                        .HasColumnType("decimal(15,2)");
 
                     b.HasKey("ProdutoId");
 
