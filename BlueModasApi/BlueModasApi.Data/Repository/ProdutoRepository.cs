@@ -21,6 +21,7 @@ namespace BlueModasApi.Data.Repository
         {
             return await _dbSet
                 .Include(p => p.TipoPublicoAlvoCategoria)
+                    .ThenInclude(t => t.Categoria)
                 .Where(t =>
                     (t.TipoPublicoAlvoCategoria.TipoPublicoAlvoId == idTipoPublicoAlvo || !idTipoPublicoAlvo.HasValue) &&
                     (t.TipoPublicoAlvoCategoria.CategoriaId == idCategoria || !idCategoria.HasValue)

@@ -34,7 +34,7 @@ namespace BlueModasWeb.UI.Web.Controllers
 
                 return PartialView("_TipoPublicoAlvoDropDownList", tipoPublicoAlvo);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError);
             }

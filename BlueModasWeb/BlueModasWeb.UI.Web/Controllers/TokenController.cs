@@ -28,7 +28,7 @@ namespace BlueModasWeb.UI.Web.Controllers
                 var token = JsonConvert.DeserializeObject<Token>(tokenRequest.Content.ReadAsStringAsync().Result);
                 HttpContext.Session.SetAccessToken(token);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Produtos", "Home");
             }
             catch (Exception e)
             {

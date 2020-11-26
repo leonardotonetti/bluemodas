@@ -1,4 +1,5 @@
-﻿using BlueModasWeb.UI.Web.Request.TipoPublicoAlvo;
+﻿using BlueModasWeb.UI.Web.Request.Produto;
+using BlueModasWeb.UI.Web.Request.TipoPublicoAlvo;
 using BlueModasWeb.UI.Web.Request.Token;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +11,7 @@ namespace BlueModasWeb.UI.Web.CrossCutting.IoC
         {
             services.AddTransient<ITokenRequest, TokenRequest>();
             services.AddTransient<ITipoPublicoAlvoRequest, TipoPublicoAlvoRequest>();
+            services.AddTransient<IProdutoRequest, ProdutoRequest>();
 
             return services;
         }

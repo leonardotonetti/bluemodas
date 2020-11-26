@@ -30,7 +30,7 @@ namespace BlueModasApi.Api.Controllers
             }
             catch (Exception ex)
             {
-                return Erro(ex);
+                return Error(ex);
             }
         }
     }

@@ -8,6 +8,7 @@ namespace BlueModasApi.Business.Interfaces.Data.UnitOfWork
         ITipoPublicoAlvoRepository TipoPublicoAlvoRepository { get; }
         ICategoriaRepository CategoriaRepository { get; }
         IProdutoRepository ProdutoRepository { get; }
+        ITipoPublicoAlvoCategoriaRepository TipoPublicoAlvoCategoriaRepository { get; }
         void Save();
     }
 }

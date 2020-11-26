@@ -17,7 +17,7 @@ namespace BlueModasApi.Api.Util
             _notification = notification;
         }
 
-        public StatusCodeResult Erro(Exception ex)
+        public StatusCodeResult Error(Exception ex)
         {
             _logger.LogError("Ocorreu um erro interno. Erro: {0}. Onde: {1}", ex.Message, ex.StackTrace);
             _notification.AddInternalError();
