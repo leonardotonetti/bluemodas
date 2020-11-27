@@ -1,0 +1,22 @@
+﻿@model IEnumerable<BlueModasWeb.UI.Web.Models.Produto>
+@{ Layout = null;}
+
+@foreach (var produto in Model)
+{
+    <div class="col-md-4 mb-4">
+        <div class="card" style="width: 18rem;">
+            <img src="~/images/semimagem.jpg" class="card-img-top">
+            <div class="card-body">
+                <div class="text-center pt-4" produto="@Json.Serialize(produto).ToString()">
+                    <h5>@produto.Nome</h5>
+                    <p class="mb-2 text-muted text-uppercase small">@produto.TipoPublicoAlvoCategoria.Categoria.Nome</p>
+                    <hr>
+                    <h6 class="mb-3">R$ @produto.ValorUnitario</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1 mb-2" onclick="adicionarProdutoCarrinho(this)">
+                        <i class="fas fa-shopping-cart pr-2"></i>Adicionar ao carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

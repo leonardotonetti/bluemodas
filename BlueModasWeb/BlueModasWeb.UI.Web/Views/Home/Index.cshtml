@@ -1,0 +1,94 @@
+﻿@model IEnumerable<BlueModasWeb.UI.Web.Models.Produto>
+@{ Layout = "_Layout";}
+
+<section>
+    <div class="row">
+        <div class="row col-md-12" id="divProdutos"></div>
+    </div>
+</section>
+<section>
+    <div class="row">
+        <div class="row col-md-12" id="divCarrinho"></div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script>
+        var lstItensCarrinho = [];
+
+        (function() {
+            $.get("@Url.Action("Produtos", "Produto")").done(function(data) {
+                if (data)
+                    $("#divProdutos").html(data);
+            });
+        })();
+
+        function filtrarProdutos(idTipoPublicoAlvo, idCategoria) {
+            $.get("@Url.Action("Produtos", "Produto")",
+                {
+                    idTipoPublicoAlvo: idTipoPublicoAlvo,
+                    idCategoria: idCategoria
+                }).done(function(data) {
+                if (data) {
+                    $("#divProdutos").slideUp("fast",
+                        function() {
+                            $("#divProdutos").html(data).slideDown("fast");
+                        });
+                }
+            });
+        }
+
+        function adicionarProdutoCarrinho(element) {
+            var produto = $(element).closest("div").attr("produto");
+
+            if (lstItensCarrinho.includes(produto)) {
+                $("#mensagemToast").text("Produto já adicionado. Verifique o carrinho!");
+                $(".toast").toast("show");
+                return;
+            }
+
+            lstItensCarrinho.push(produto);
+
+            $("#mensagemToast").text("Produto adicionado ao carrinho!");
+            $(".toast").toast("show");
+            $("#spnQtdCarrinho").text(lstItensCarrinho.length);
+        }
+
+        function calcularValorTotal() {
+            var valorTotal = 0;
+
+            $(".dadosItem").each(function() {
+                var quantidade = $(this).find("#txtQuantidade").val(),
+                    valorUnitario = $(this).find("#spnValorUnitario").data("valorunitario");
+
+                valorTotal += quantidade * valorUnitario;
+            });
+
+            $("#spnValorTotal").text("R$ " + valorTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+        }
+
+        function excluirItem(element) {
+            lstItensCarrinho.splice($(element).closest(".divItem").data("index"), 1); 
+
+            $(element).closest(".divItem").remove();
+
+            var quantidadeRestante = $(".divItem").length;
+            $("#spnQtdProdutos, #spnQtdCarrinho").text(quantidadeRestante);
+
+            calcularValorTotal();
+
+            if (!quantidadeRestante)
+                continuarComprando();
+        }
+
+        function continuarComprando() {
+            $("#divCarrinho").slideUp("fast",
+                function () {
+                    $("#divCarrinho").empty();
+                    $("#divProdutos").slideDown("fast");
+                });
+        }
+    </script>
+}
+

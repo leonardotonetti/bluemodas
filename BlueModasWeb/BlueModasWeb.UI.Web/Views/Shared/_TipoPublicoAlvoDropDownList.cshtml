@@ -1,23 +1,23 @@
 ﻿@model IEnumerable<BlueModasWeb.UI.Web.Models.TipoPublicoAlvo>
 
 <li class="nav-item">
-    <a class="nav-link" role="button">
+    <a class="nav-link" role="button" value="" onclick="filtrarProdutos()">
         Todos
     </a>
 </li>
 @foreach (var tipoPublicoAlvo in Model)
 {
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             @tipoPublicoAlvo.Nome
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <h6 class="dropdown-header">Categorias</h6>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" value="">Todos</a>
+            <a class="dropdown-item" onclick="filtrarProdutos('@tipoPublicoAlvo.TipoPublicoAlvoId')">Todos</a>
             @foreach (var tipoPublicloAlvoCategoria in tipoPublicoAlvo.TipoPublicoAlvoCategoria)
             {
-                <a class="dropdown-item" value="@tipoPublicloAlvoCategoria.CategoriaId">@tipoPublicloAlvoCategoria.Categoria.Nome</a>
+                <a class="dropdown-item" onclick="filtrarProdutos('@tipoPublicoAlvo.TipoPublicoAlvoId', '@tipoPublicloAlvoCategoria.CategoriaId')">@tipoPublicloAlvoCategoria.Categoria.Nome</a>
             }
         </div>
     </li>
