@@ -4,6 +4,7 @@ using BlueModasApi.CrossCutting.IoC;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,7 +24,12 @@ namespace BlueModasApi.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddControllers(options => options.Filters.Add<NotificationFilter>());
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<NotificationFilter>();
+                options.Filters.Add<ValidationFilter>();
+            });
+            services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
 
             var key = Encoding.ASCII.GetBytes(Configuration.GetSection("Token:Secret").Value);
             services.AddAuthentication(x =>

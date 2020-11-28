@@ -11,11 +11,17 @@
         <div class="row col-md-12" id="divCarrinho"></div>
     </div>
 </section>
+<section>
+    <div class="row">
+        <div class="row col-md-12" id="divFinalizarCompra"></div>
+    </div>
+</section>
 
 @section Scripts
 {
     <script>
-        var lstItensCarrinho = [];
+        var lstItensCarrinho = [],
+            carrinhoFinal = undefined;
 
         (function() {
             $.get("@Url.Action("Produtos", "Produto")").done(function(data) {
@@ -69,7 +75,7 @@
         }
 
         function excluirItem(element) {
-            lstItensCarrinho.splice($(element).closest(".divItem").data("index"), 1); 
+            lstItensCarrinho.splice($(element).closest(".divItem").data("index"), 1);
 
             $(element).closest(".divItem").remove();
 
@@ -84,10 +90,35 @@
 
         function continuarComprando() {
             $("#divCarrinho").slideUp("fast",
-                function () {
+                function() {
                     $("#divCarrinho").empty();
                     $("#divProdutos").slideDown("fast");
                 });
+        }
+
+        function finalizarCompra() {
+            var carrinho = {
+                CarrinhoItens: []
+            }
+
+            $(".divItem").each(function() {
+                carrinho.CarrinhoItens.push({
+                    QuantidadeItem: $(this).find("#txtQuantidade").val(),
+                    Produto: {
+                        ValorUnitario: $(this).find("#spnValorUnitario").data("valorunitario")
+                    }
+                });
+            });
+
+            $.post("@Url.Action("Finalizar", "Finalizar")", carrinho).done(function(data) {
+                if (data) {
+                    $("#divCarrinho").slideUp("fast",
+                        function() {
+                            $("#divFinalizarCompra").html(data).slideDown("fast");
+                            carrinhoFinal = carrinho;
+                        });
+                }
+            });
         }
     </script>
 }

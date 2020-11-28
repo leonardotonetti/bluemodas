@@ -73,16 +73,18 @@
         lstItensCarrinho.map(function (item) {
             item = JSON.parse(item);
             carrinho.CarrinhoItens.push({
-                ProdutoId: item.produtoId,
-                Nome: item.nome,
-                UrlImagem: item.urlImagem,
-                ValorUnitario: item.valorUnitario
+                Produto: {
+                    ProdutoId: item.produtoId,
+                    Nome: item.nome,
+                    UrlImagem: item.urlImagem,
+                    ValorUnitario: item.valorUnitario
+                }
             });
         });
 
         $.post("@Url.Action("Carrinho", "Carrinho")", carrinho).done(function(data) {
             if (data) {
-                $("#divProdutos").slideUp("fast",
+                $("#divProdutos, #divFinalizarCompra").slideUp("fast",
                     function() {
                         $("#divCarrinho").html(data).slideDown("fast");
                     });

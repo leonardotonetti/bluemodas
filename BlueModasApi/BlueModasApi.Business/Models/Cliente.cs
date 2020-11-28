@@ -14,7 +14,7 @@ namespace BlueModasApi.Business.Models
         [MaxLength(100)]
         [Required]
         public string Email { get; set; }
-        [MaxLength(11)]
+        [MaxLength(15)]
         [Required]
         public string Telefone { get; set; }
     }

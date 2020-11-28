@@ -14,6 +14,9 @@ namespace BlueModasApi.Data.UnitOfWork
         private ICategoriaRepository _categoriaRepository;
         private IProdutoRepository _produtoRepository;
         private ITipoPublicoAlvoCategoriaRepository _tipoPublicoAlvoCategoriaRepository;
+        private IClienteRepository _clienteRepository;
+        private IPedidoRepository _pedidoRepository;
+        private IPedidoItemRepository _pedidoItemRepository;
 
         public UnitOfWork(BlueModasApiContext dbContext)
         {
@@ -57,6 +60,36 @@ namespace BlueModasApi.Data.UnitOfWork
                 if (_tipoPublicoAlvoCategoriaRepository == null)
                     _tipoPublicoAlvoCategoriaRepository = new TipoPublicoAlvoCategoriaRepository(_dbContext);
                 return _tipoPublicoAlvoCategoriaRepository;
+            }
+        }
+
+        public IClienteRepository ClienteRepository
+        {
+            get
+            {
+                if (_clienteRepository == null)
+                    _clienteRepository = new ClienteRepository(_dbContext);
+                return _clienteRepository;
+            }
+        }
+
+        public IPedidoRepository PedidoRepository
+        {
+            get
+            {
+                if (_pedidoRepository == null)
+                    _pedidoRepository = new PedidoRepository(_dbContext);
+                return _pedidoRepository;
+            }
+        }
+
+        public IPedidoItemRepository PedidoItemRepository
+        {
+            get
+            {
+                if (_pedidoItemRepository == null)
+                    _pedidoItemRepository = new PedidoItemRepository(_dbContext);
+                return _pedidoItemRepository;
             }
         }
 

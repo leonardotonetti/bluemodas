@@ -36,6 +36,7 @@ namespace BlueModasApi.CrossCutting.IoC
             services.AddScoped<ITipoPublicoAlvoService, TipoPublicoAlvoService>();
             services.AddScoped<ICategoriaService, CategoriaService>();
             services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<IPedidoService, PedidoService>();
 
             #endregion
 
@@ -45,6 +46,9 @@ namespace BlueModasApi.CrossCutting.IoC
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<ITipoPublicoAlvoCategoriaRepository, TipoPublicoAlvoCategoriaRepository>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<IPedidoItemRepository, PedidoItemRepository>();
 
             #endregion
 

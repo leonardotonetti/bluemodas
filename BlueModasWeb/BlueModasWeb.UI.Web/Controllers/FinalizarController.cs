@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlueModasWeb.UI.Web.Controllers
 {
-    public class CarrinhoController : Controller
+    public class FinalizarController : Controller
     {
-        [HttpPost]
-        public IActionResult Carrinho(CarrinhoViewModel carrinho)
+        public IActionResult Finalizar(CarrinhoViewModel carrinho)
         {
             return View(carrinho);
         }
