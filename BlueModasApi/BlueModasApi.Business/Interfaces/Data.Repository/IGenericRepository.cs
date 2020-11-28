@@ -7,7 +7,7 @@ namespace BlueModasApi.Business.Interfaces.Data.Repository
     {
         Task<T> GetById(object id);
         Task<IEnumerable<T>> GetAll();
-        void Insert(T entidade);
+        Task<T> InsertAsync(T entidade);
         void Update(T entidade);
         void Delete(object id);
     }

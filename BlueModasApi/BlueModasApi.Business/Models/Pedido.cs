@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlueModasApi.Business.Models
 {
@@ -11,5 +12,7 @@ namespace BlueModasApi.Business.Models
         public int ClienteId { get; set; }
 
         public Cliente Cliente { get; set; }
+
+        public IEnumerable<PedidoItem> PedidoItens { get; set; }
     }
 }

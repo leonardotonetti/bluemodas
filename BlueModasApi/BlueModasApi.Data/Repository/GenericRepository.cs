@@ -27,9 +27,10 @@ namespace BlueModasApi.Data.Repository
             return await _dbSet.ToListAsync();
         }
 
-        public virtual void Insert(T entity)
+        public virtual async Task<T> InsertAsync(T entity)
         {
-            _dbSet.Add(entity);
+            var teste = await _dbSet.AddAsync(entity);
+            return teste.Entity;
         }
 
         public virtual void Update(T entity)

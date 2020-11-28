@@ -15,6 +15,10 @@ namespace BlueModasApi.Data.Context
             modelBuilder.HasSequence<int>("PedidoCodigo")
                 .StartsAt(1)
                 .IncrementsBy(1);
+
+            modelBuilder.Entity<Pedido>()
+                .Property(o => o.PedidoCodigo)
+                .HasDefaultValueSql("NEXT VALUE FOR PedidoCodigo");
         }
 
         public DbSet<TipoPublicoAlvo> TipoPublicoAlvo { get; set; }

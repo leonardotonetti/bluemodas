@@ -1,4 +1,5 @@
-﻿using BlueModasApi.Business.Interfaces.Data.Repository;
+﻿using System.Threading.Tasks;
+using BlueModasApi.Business.Interfaces.Data.Repository;
 using BlueModasApi.Business.Models;
 using BlueModasApi.Data.Context;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,15 @@ namespace BlueModasApi.Data.Repository
         public PedidoRepository(BlueModasApiContext context) : base(context)
         {
             _dbSet = context.Set<Pedido>();
+        }
+
+        public async Task<Pedido> Get(int idPedido)
+        {
+            return await _dbSet
+                .Include(p => p.Cliente)
+                .Include(p => p.PedidoItens)
+                    .ThenInclude(pi => pi.Produto)
+                .FirstOrDefaultAsync(p => p.PedidoId == idPedido);
         }
     }
 }

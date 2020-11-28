@@ -16,6 +16,15 @@ namespace BlueModasApi.Business.Util
             CreateMap<TipoPublicoAlvoCategoria, TipoPublicoAlvoCategoriaDto>();
 
             CreateMap<Produto, ProdutoDto>();
+
+            CreateMap<ClienteDto, Cliente>();
+            CreateMap<Cliente, ClienteDto>();
+
+            CreateMap<PedidoDto, Pedido>();
+            CreateMap<Pedido, PedidoDto>();
+
+            CreateMap<PedidoItemDto, PedidoItem>();
+            CreateMap<PedidoItem, PedidoItemDto>();
         }
     }
 }
