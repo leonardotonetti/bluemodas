@@ -16,6 +16,11 @@
         <div class="row col-md-12" id="divFinalizarCompra"></div>
     </div>
 </section>
+<section>
+    <div class="row">
+        <div class="row col-md-12" id="divPedido"></div>
+    </div>
+</section>
 
 @section Scripts
 {
@@ -105,6 +110,7 @@
                 carrinho.CarrinhoItens.push({
                     QuantidadeItem: $(this).find("#txtQuantidade").val(),
                     Produto: {
+                        ProdutoId: $(this).find(".dadosItem").data("produtoid"),
                         ValorUnitario: $(this).find("#spnValorUnitario").data("valorunitario")
                     }
                 });
@@ -119,6 +125,46 @@
                             $("#txtTelefone").mask("(00) 00000-0000");
                         });
                 }
+            });
+        }
+
+        function confirmarCompra() {
+            var pedido = {
+                Cliente: {
+                    Nome: $("#divFinalizarCompra").find($("#txtNome")).val(),
+                    SobreNome: $("#divFinalizarCompra").find($("#txtSobrenome")).val(),
+                    Email: $("#divFinalizarCompra").find($("#txtEmail")).val(),
+                    Telefone: $("#divFinalizarCompra").find($("#txtTelefone")).val()
+                },
+                PedidoItens: []
+            }
+
+            carrinhoFinal.CarrinhoItens.forEach(function(item) {
+                pedido.PedidoItens.push({
+                    Quantidade: item.QuantidadeItem,
+                    ProdutoId: item.Produto.ProdutoId
+                });
+            });
+
+            $.post("@Url.Action("Confirmar", "Pedido")", pedido).done(function(data) {
+                if (data) {
+                    $("#divFinalizarCompra").slideUp("fast",
+                        function () {
+                            $("#spnQtdCarrinho").text(0);
+                            lstItensCarrinho = [];
+                            carrinhoFinal = undefined;
+                            $("#divPedido").html(data).slideDown("fast");
+                        });
+                }
+            }).fail(function(xhr) {
+                var erros = JSON.parse(xhr.responseText);
+
+                $("#mensagemToast").empty();
+                erros.forEach(function(erro) {
+                    $("#mensagemToast").append("<p>" + erro.message + "</p>");
+                });
+
+                $(".toast").toast("show");
             });
         }
     </script>

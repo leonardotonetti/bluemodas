@@ -22,16 +22,19 @@ namespace BlueModasApi.Business.Services
         {
             var pedido = _mapper.Map<PedidoDto, Pedido>(pedidoDto);
 
-            var clienteInserido = await _unitOfWork.ClienteRepository.InsertAsync(pedido.Cliente);
-
-            pedido.ClienteId = clienteInserido.ClienteId;
-            var pedidoInserido = await _unitOfWork.PedidoRepository.InsertAsync(pedido);
-
-            foreach (var item in pedidoInserido.PedidoItens)
+            var cliente = await _unitOfWork.ClienteRepository.Get(pedido.Cliente.Nome, pedido.Cliente.SobreNome);
+            if (cliente != null)
             {
-                item.PedidoId = pedidoInserido.PedidoId;
-                await _unitOfWork.PedidoItemRepository.InsertAsync(item);
+                pedido.ClienteId = cliente.ClienteId;
+
+                cliente.Email = pedidoDto.Cliente.Email;
+                cliente.Telefone = pedidoDto.Cliente.Telefone;
+                _unitOfWork.ClienteRepository.Update(cliente);
+
+                pedido.Cliente = null;
             }
+
+            var pedidoInserido = await _unitOfWork.PedidoRepository.InsertAsync(pedido);
 
             _unitOfWork.Save();
 
