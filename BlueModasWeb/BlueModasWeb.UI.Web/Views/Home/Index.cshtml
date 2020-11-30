@@ -128,6 +128,25 @@
             });
         }
 
+        function buscarCliente() {
+            var nomeCliente = $("#divFinalizarCompra").find($("#txtNome")).val(),
+                sobreNomeCliente = $("#divFinalizarCompra").find($("#txtSobrenome")).val();
+
+            if (!nomeCliente || !sobreNomeCliente)
+                return;
+
+            $.get("@Url.Action("Cliente", "Cliente")",
+            {
+                nome: nomeCliente,
+                sobreNome: sobreNomeCliente
+            }).done(function(data) {
+                if (data) {
+                    $("#txtEmail").val(data.email);
+                    $("#txtTelefone").val(data.telefone);
+                }
+            });
+        }
+
         function confirmarCompra() {
             var pedido = {
                 Cliente: {
@@ -149,7 +168,7 @@
             $.post("@Url.Action("Confirmar", "Pedido")", pedido).done(function(data) {
                 if (data) {
                     $("#divFinalizarCompra").slideUp("fast",
-                        function () {
+                        function() {
                             $("#spnQtdCarrinho").text(0);
                             lstItensCarrinho = [];
                             carrinhoFinal = undefined;

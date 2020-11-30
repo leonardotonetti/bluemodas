@@ -36,6 +36,7 @@ namespace BlueModasApi.CrossCutting.IoC
             services.AddScoped<ITipoPublicoAlvoService, TipoPublicoAlvoService>();
             services.AddScoped<ICategoriaService, CategoriaService>();
             services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IPedidoService, PedidoService>();
 
             #endregion

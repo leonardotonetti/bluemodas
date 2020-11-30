@@ -4,27 +4,40 @@
 <div class="col-lg-12">
     <div class="mb-3">
         <div class="pt-4">
-            <h5 class="mb-4">Obrigado <span>@Model.Cliente.Nome</span> por comprar com a gente!</h5>
-            <h5 class="mb-4">Aqui estão os detalhes da sua compra: </h5>
-
-            <div class="card pb-1">
+            <h5>Obrigado <span>@Model.Cliente.Nome</span> por comprar com a gente!</h5>
+            <h5 class="mb-3">Aqui estão os detalhes da sua compra: </h5>
+            <div class="card pb-1 mb-3">
                 <div class="card-body">
-                    <h5 class="mb-2">Seus dados</h5>
-                    <div class="row mb-4">
-                        <h6>@Model.Cliente.Nome</h6>
-                    </div>
-                    <div class="row mb-4">
-                        <h6>@Model.Cliente.SobreNome</h6>
-                    </div>
-                    <div class="row mb-4">
-                        <h6>@Model.Cliente.Email</h6>
-                    </div>
-                    <div class="row mb-4">
-                        <h6>@Model.Cliente.Telefone</h6>
+                    <h5 class="mb-2">Dados da compra</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>Código: @Model.PedidoCodigo</h6>
+                        </div>
+                        <div class="col-md-12">
+                            <h6>Valor total: R$ @Model.ValorTotal</h6>
+                        </div>
                     </div>
                 </div>
             </div>
-
+            <div class="card pb-1 mb-3">
+                <div class="card-body">
+                    <h5 class="mb-2">Seus dados</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>Nome: @Model.Cliente.Nome</h6>
+                        </div>
+                        <div class="col-md-12">
+                            <h6>Sobrenome: @Model.Cliente.SobreNome</h6>
+                        </div>
+                        <div class="col-md-12">
+                            <h6>Email: @Model.Cliente.Email</h6>
+                        </div>
+                        <div class="col-md-12">
+                            <h6>Telefone: @Model.Cliente.Telefone</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="card pb-1">
                 <div class="card-body">
                     <h5 class="mb-2">Seus produtos</h5>
