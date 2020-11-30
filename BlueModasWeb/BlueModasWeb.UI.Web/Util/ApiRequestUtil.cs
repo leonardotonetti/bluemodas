@@ -18,9 +18,13 @@ namespace BlueModasWeb.UI.Web.Util
             _uriBuilder = new UriBuilder
             {
                 Host = config.GetSection("BlueModasApi:Host").Value,
-                Port = int.Parse(config.GetSection("BlueModasApi:Port").Value),
                 Scheme = bool.Parse(config.GetSection("BlueModasApi:IsHttps").Value) ? Uri.UriSchemeHttps : Uri.UriSchemeHttp
             };
+
+            var port = config.GetSection("BlueModasApi:Port").Value;
+            if (!string.IsNullOrEmpty(port))
+                _uriBuilder.Port = int.Parse(port);
+
         }
 
         public ApiRequestUtil AddPath(string path)

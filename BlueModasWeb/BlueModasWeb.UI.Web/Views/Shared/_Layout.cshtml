@@ -3,11 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blue Modas</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+
+    <link rel="icon" href="~/images/bluemodas.jpg">
+    <title>Blue Modas - Tudo pra você andar na moda</title>
 </head>
 <body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark navbar-font">
@@ -20,7 +23,7 @@
         <div class="justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="abrirCarrinho()">
+                    <a class="nav-link" role="button" onclick="abrirCarrinho()">
                         Carrinho <i class="fas fa-shopping-cart"></i>
                         <span class="badge badge-danger" id="spnQtdCarrinho">0</span>
                     </a>
@@ -108,7 +111,8 @@
         $.post("@Url.Action("Carrinho", "Carrinho")", carrinho).done(function(data) {
             if (data) {
                 $("#divProdutos, #divFinalizarCompra").slideUp("fast",
-                    function() {
+                    function () {
+                        $("#divTipoPublicoAlvo").hide();
                         $("#divCarrinho").html(data).slideDown("fast");
                     });
             }

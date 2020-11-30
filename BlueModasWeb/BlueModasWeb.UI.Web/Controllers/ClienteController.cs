@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using BlueModasWeb.UI.Web.Models;
 using BlueModasWeb.UI.Web.Request.Cliente;
@@ -24,7 +23,7 @@ namespace BlueModasWeb.UI.Web.Controllers
             {
                 var accessToken = HttpContext.Session.GetAccessToken();
                 if (accessToken == null)
-                    RedirectToAction("GetAccessToken", "Token");
+                    return RedirectToAction("GetAccessToken", "Token");
 
                 var clienteRequest = _clienteRequest.Get(accessToken, nome, sobreNome);
                 if (!clienteRequest.IsSuccessStatusCode)

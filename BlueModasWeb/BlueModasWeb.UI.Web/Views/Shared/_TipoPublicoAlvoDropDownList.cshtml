@@ -14,10 +14,10 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <h6 class="dropdown-header">Categorias</h6>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" onclick="filtrarProdutos('@tipoPublicoAlvo.TipoPublicoAlvoId')">Todos</a>
+            <a class="dropdown-item" role="button" onclick="filtrarProdutos('@tipoPublicoAlvo.TipoPublicoAlvoId')">Todos</a>
             @foreach (var tipoPublicloAlvoCategoria in tipoPublicoAlvo.TipoPublicoAlvoCategoria)
             {
-                <a class="dropdown-item" onclick="filtrarProdutos('@tipoPublicoAlvo.TipoPublicoAlvoId', '@tipoPublicloAlvoCategoria.CategoriaId')">@tipoPublicloAlvoCategoria.Categoria.Nome</a>
+                <a class="dropdown-item" role="button" onclick="filtrarProdutos('@tipoPublicoAlvo.TipoPublicoAlvoId', '@tipoPublicloAlvoCategoria.CategoriaId')">@tipoPublicloAlvoCategoria.Categoria.Nome</a>
             }
         </div>
     </li>

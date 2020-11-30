@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using BlueModasWeb.UI.Web.Models;
 using BlueModasWeb.UI.Web.Request.Produto;
@@ -25,7 +24,7 @@ namespace BlueModasWeb.UI.Web.Controllers
             {
                 var accessToken = HttpContext.Session.GetAccessToken();
                 if (accessToken == null)
-                    RedirectToAction("GetAccessToken", "Token");
+                    return RedirectToAction("GetAccessToken", "Token");
 
                 var produtoRequest = _produtoRequest.Get(accessToken, idTipoPublicoAlvo, idCategoria);
                 if (!produtoRequest.IsSuccessStatusCode)

@@ -25,7 +25,7 @@ namespace BlueModasWeb.UI.Web.Controllers
             {
                 var accessToken = HttpContext.Session.GetAccessToken();
                 if (accessToken == null)
-                    RedirectToAction("GetAccessToken", "Token");
+                    return RedirectToAction("GetAccessToken", "Token");
 
                 var pedidoRequest = _pedidoRequest.Post(accessToken, pedido);
                 if (!pedidoRequest.IsSuccessStatusCode)

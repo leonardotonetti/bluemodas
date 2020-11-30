@@ -24,7 +24,7 @@ namespace BlueModasWeb.UI.Web.Controllers
             {
                 var accessToken = HttpContext.Session.GetAccessToken();
                 if (accessToken == null)
-                    RedirectToAction("GetAccessToken", "Token");
+                    return RedirectToAction("GetAccessToken", "Token");
 
                 var tipoPublicoAlvoRequest = _tipoPublicoAlvoRequest.Get(accessToken);
                 if (!tipoPublicoAlvoRequest.IsSuccessStatusCode)
